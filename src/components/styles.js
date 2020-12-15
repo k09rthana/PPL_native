@@ -44,6 +44,11 @@ const styles = StyleSheet.create({
   submitButton: {
     color: 'orange',
   },
+  stretch: {
+    width: 325,
+    height: 200,
+    resizeMode: 'stretch',
+  },
 });
 
 export default styles;

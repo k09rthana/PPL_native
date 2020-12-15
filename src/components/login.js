@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Axios from 'axios';
 import {AsyncStorage} from 'react-native';
 import {BASE_URL} from '../backendPPL/config/config';
+import Signup from './signup';
 
 const Login = ({navigation}) => {
   const handleSubmit = () => {
@@ -15,11 +16,39 @@ const Login = ({navigation}) => {
     };
     Axios.post(BASE_URL + '/auth/login', obj)
       .then((result) => {
-        console('Logged in');
+        if (result) {
+          let STORAGE_KEY = result.data;
+          Axios.post(BASE_URL + '/auth/login', result.data).then(
+            (result) => {
+              if (result.data) {
+                if (result.data.isVerified) {
+                  AsyncStorage.setItem(
+                    'STORAGE_KEY',
+                    JSON.stringify(result.data),
+                    (err) => {
+                      console.log(err);
+                    },
+                  );
+                  AsyncStorage.setItem(
+                    'STORAGE_KEY',
+                    JSON.stringify(STORAGE_KEY.token),
+                    (err) => {
+                      console.log(err);
+                    },
+                  );
+                  signIn(STORAGE_KEY);
+                } else {
+                  alert('Invalid Username or Password');
+                }
+              } else {
+                setModalVisible(true);
+              }
+            },
+          );
+        }
       })
-      .catch((result) => {
-        console.log('Error>>>', result);
-        console.log(BASE_URL);
+      .catch((err) => {
+        console.log('here error comming', err);
       });
   };
 
@@ -56,11 +85,7 @@ const Login = ({navigation}) => {
           />
         </View>
 
-        <Button
-          title="Login"
-          color="orange"
-          onPress={handleSubmit}
-        />
+        <Button title="Login" color="orange" onPress={handleSubmit} />
         <Text></Text>
         <Button
           style={{color: 'orange'}}
@@ -74,7 +99,21 @@ const Login = ({navigation}) => {
   );
 };
 
-export default Login;
+const Stack = createStackNavigator();
+
+function LoginNavigation() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="Login" component={Login} />
+        {/* <Stack.Screen name="loggedinHome" component={loggedinHome} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default LoginNavigation;
 
 // const styles = StyleSheet.create({
 //   header: {

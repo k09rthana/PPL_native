@@ -98,42 +98,26 @@
 
 // export default App;
 
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button, View, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import Signup from './src/components/signup';
+
 import Login from './src/components/login';
+import Home from './src/loggedin/home';
 import 'react-native-gesture-handler';
 import style from './src/components/styles';
-
-function HomeScreen({navigation}) {
-  return (
-    <View>
-      <View>
-        {/* <Image style={styles.logo_bg} source={require('../images/arw2.png')} /> */}
-      </View>
-      <View>
-        <Button title="SignUp" onPress={() => navigation.navigate('Signup')} />
-        <Button title="Login" onPress={() => navigation.navigate('Login')} />
-        <View>{/* <Image source={require('../images/img_9.png')} /> */}</View>
-      </View>
-    </View>
-  );
-}
-
-const Stack = createStackNavigator();
+import AsyncStorage from 'react';
 
 function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="Login" component={Login} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  // const [isLoggedin, setIsLoggedin] = React.useState(false);
+
+  // AsyncStorage.getItem('isLoggedin').then((data) => {
+  //   if (data != null && data == true) setIsLogedin(true);
+  //   else setIsLoggedin(false);
+  // });
+  // return isLoggedin ? <Home /> : <Login />;
+  return <Home />;
 }
 
 export default App;
