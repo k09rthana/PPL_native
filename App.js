@@ -105,15 +105,19 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Signup from './src/components/signup';
 import Login from './src/components/login';
 import 'react-native-gesture-handler';
+import style from './src/components/styles';
 
 function HomeScreen({navigation}) {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      {/* <Text>Home Screen</Text> */}
-       <Button title="SignUp" onPress={() => navigation.navigate('Signup')} /> 
-      <Button title="Login" onPress={() => navigation.navigate('Login')}>
-        hjg
-      </Button>
+    <View>
+      <View>
+        {/* <Image style={styles.logo_bg} source={require('../images/arw2.png')} /> */}
+      </View>
+      <View>
+        <Button title="SignUp" onPress={() => navigation.navigate('Signup')} />
+        <Button title="Login" onPress={() => navigation.navigate('Login')} />
+        <View>{/* <Image source={require('../images/img_9.png')} /> */}</View>
+      </View>
     </View>
   );
 }

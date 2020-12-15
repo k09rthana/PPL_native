@@ -1,49 +1,48 @@
 import React, {useState} from 'react';
 import {Button, View, Text, StyleSheet, TextInput, Image} from 'react-native';
-// import styles from './style';
+import styles from './styles';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Axios from 'axios';
 import {AsyncStorage} from 'react-native';
-// import {BASE_URL} from '../../../backendPPL/config/config';
+import {BASE_URL} from '../backendPPL/config/config';
 
 const Signup = ({navigation}) => {
-  
   const handleSubmit = () => {
     let obj = {
       username: username,
-      lastName: lastName,
-      firstName: firstName,
-      email: email,
       password: password,
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
     };
-    console.log(obj);
-    console.log(BASE_URL);
-
-    Axios.post(BASE_URL + '/auth/sign_up', obj, {})
+    console.log(obj, '><><><><>><');
+    Axios.post(BASE_URL + '/auth/sign_up', obj)
       .then((result) => {
-        alert('Registered Successfully');
+        console('Registered Successfully');
       })
-      .catch((e) => {
-        alert('Error', e);
+      .catch((result) => {
+        console.log('Error>>>', result);
+        console.log(BASE_URL);
       });
   };
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   return (
     <View style={styles.header}>
       <View>
         <Image style={styles.logo} source={require('../images/logo.png')} />
-        <Text>Home E- Coupons E- Brands Reuse Market</Text>
+        {/* <Text>Home E- Coupons E- Brands Reuse Market</Text> */}
       </View>
       <View style={styles.container}>
         <View>
           <Text style={styles.heading}>CREATE AN ACCOUNT</Text>
         </View>
-        <Text>Username</Text>
+        <Text style={styles.label}>Username</Text>
         <View style={styles.rowContainer}>
           <TextInput
             style={styles.input}
@@ -56,7 +55,7 @@ const Signup = ({navigation}) => {
           />
         </View>
 
-        <Text>Password</Text>
+        <Text style={styles.label}>Password</Text>
         <View style={styles.rowContainer}>
           <TextInput
             style={styles.input}
@@ -68,7 +67,7 @@ const Signup = ({navigation}) => {
             }}
           />
         </View>
-        <Text>Email</Text>
+        <Text style={styles.label}>Email</Text>
         <View style={styles.rowContainer}>
           <TextInput
             style={styles.input}
@@ -80,7 +79,7 @@ const Signup = ({navigation}) => {
             }}
           />
         </View>
-        <Text>First Name</Text>
+        <Text style={styles.label}>First Name</Text>
         <View style={styles.rowContainer}>
           <TextInput
             style={styles.input}
@@ -92,7 +91,7 @@ const Signup = ({navigation}) => {
             }}
           />
         </View>
-        <Text>Last Name</Text>
+        <Text style={styles.label}>Last Name</Text>
         <View style={styles.rowContainer}>
           <TextInput
             style={styles.input}
@@ -106,15 +105,15 @@ const Signup = ({navigation}) => {
         </View>
 
         <Button
-          // buttonStyle={styles.signupButton}
-          color="orange"
+          buttonStyle={styles.submitButton}
+          // color="orange"
           onPress={handleSubmit}
           title="Signup"
         />
         <Button
-          style={{color: 'orange'}}
+          buttonStyle={styles.submitButton}
           title="Log in to my Account"
-          color="orange"
+          // color="orange"
           onPress={() => navigation.push('Login')}
         />
       </View>
@@ -124,40 +123,42 @@ const Signup = ({navigation}) => {
 
 export default Signup;
 
-const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    backgroundColor: 'orange',
-  },
-  heading: {
-    display: 'flex',
-    color: 'orange',
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  input: {
-    backgroundColor: 'white',
-    margin: 2,
-    width: 300,
-  },
-  container: {
-    flex: 1,
+// const styles = StyleSheet.create({
+//   header: {
+//     flex: 1,
+//     backgroundColor: 'orange',
+//   },
+//   heading: {
+//     display: 'flex',
+//     color: 'orange',
+//     fontSize: 20,
+//     fontWeight: 'bold',
+//     marginBottom: 20,
+//   },
+//   input: {
+//     backgroundColor: 'white',
+//     margin: 2,
+//     width: 300,
+//   },
+//   container: {
+//     flex: 1,
 
-    backgroundColor: 'white',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5F5F5',
-  },
+//     backgroundColor: 'white',
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#F5F5F5',
+//   },
 
-  rowContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  logo: {
-    backgroundColor: 'white',
-  },
-});
+//   rowContainer: {
+//     flex: 1,
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//   },
+//   logo: {
+//     backgroundColor: 'white',
+//     marginLeft: 30,
+
+//   },
+// });
