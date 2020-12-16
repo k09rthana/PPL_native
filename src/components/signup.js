@@ -19,10 +19,10 @@ const Signup = ({navigation}) => {
     console.log(obj, '><><><><>><');
     Axios.post(BASE_URL + '/auth/sign_up', obj)
       .then((result) => {
-        console('Registered Successfully');
+        alert('Registered Successfully');
       })
       .catch((result) => {
-        console.log('Error>>>', result);
+        alert.log('Error>>>', result);
         console.log(BASE_URL);
       });
   };
@@ -36,7 +36,6 @@ const Signup = ({navigation}) => {
     <View style={styles.header}>
       <View>
         <Image style={styles.logo} source={require('../images/logo.png')} />
-        {/* <Text>Home E- Coupons E- Brands Reuse Market</Text> */}
       </View>
       <View style={styles.container}>
         <View>

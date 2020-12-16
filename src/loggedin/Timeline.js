@@ -8,17 +8,19 @@ import {
   Image,
 } from 'react-native';
 import Styles from '../components/styles';
-import UploadPost from './UploadPost';
+import UploadPost from './MyUploads';
 
 const Timeline = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView>
-        <View>
-        <Button
+      <Button
             title="Upload Post"
             onPress={() => navigation.navigate('UploadPost')}
+            style={{margin:10}}
           />
+        <View>
+      
         </View>
         <View style={{flex: 1, padding: 30}}>
           

@@ -110,14 +110,14 @@ import style from './src/components/styles';
 import AsyncStorage from 'react';
 
 function App() {
-  // const [isLoggedin, setIsLoggedin] = React.useState(false);
+  const [isLoggedin, setIsLoggedin] = React.useState(true);
 
   // AsyncStorage.getItem('isLoggedin').then((data) => {
   //   if (data != null && data == true) setIsLogedin(true);
   //   else setIsLoggedin(false);
   // });
-  // return isLoggedin ? <Home /> : <Login />;
-  return <Home />;
+  return isLoggedin ? <Home /> : <Login />;
+  // return <Home />;
 }
 
 export default App;

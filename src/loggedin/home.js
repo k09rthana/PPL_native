@@ -86,7 +86,7 @@ function firstScreenStack({navigation}) {
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
           headerStyle: {
-            backgroundColor: 'orange', //Set Header color
+            backgroundColor: 'blue', //Set Header color
           },
           headerTintColor: '#fff', //Set Header text color
           headerTitleStyle: {
@@ -107,7 +107,7 @@ function secondScreenStack({navigation}) {
           <NavigationDrawerStructure navigationProps={navigation} />
         ),
         headerStyle: {
-          backgroundColor: 'orange', //Set Header color
+          backgroundColor: 'blue', //Set Header color
         },
         headerTintColor: '#fff', //Set Header text color
         headerTitleStyle: {
@@ -144,7 +144,7 @@ function thirdScreenStack({navigation}) {
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
           headerStyle: {
-            backgroundColor: 'orange', //Set Header color
+            backgroundColor: 'blue', //Set Header color
           },
           headerTintColor: '#fff', //Set Header text color
           headerTitleStyle: {

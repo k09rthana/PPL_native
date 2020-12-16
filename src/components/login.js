@@ -17,38 +17,13 @@ const Login = ({navigation}) => {
     Axios.post(BASE_URL + '/auth/login', obj)
       .then((result) => {
         if (result) {
-          let STORAGE_KEY = result.data;
-          Axios.post(BASE_URL + '/auth/login', result.data).then(
-            (result) => {
-              if (result.data) {
-                if (result.data.isVerified) {
-                  AsyncStorage.setItem(
-                    'STORAGE_KEY',
-                    JSON.stringify(result.data),
-                    (err) => {
-                      console.log(err);
-                    },
-                  );
-                  AsyncStorage.setItem(
-                    'STORAGE_KEY',
-                    JSON.stringify(STORAGE_KEY.token),
-                    (err) => {
-                      console.log(err);
-                    },
-                  );
-                  signIn(STORAGE_KEY);
-                } else {
-                  alert('Invalid Username or Password');
-                }
-              } else {
-                setModalVisible(true);
-              }
-            },
-          );
+          AsyncStorage.setItem("email","email")
+        } else {
+          alert('Invalid Username or Password');
         }
       })
-      .catch((err) => {
-        console.log('here error comming', err);
+      .catch((e) => {
+        console.log('error>>>>>>>>>>>>>', e);
       });
   };
 
@@ -78,6 +53,7 @@ const Login = ({navigation}) => {
             style={styles.input}
             name="password"
             color="black"
+            secureTextEntry={true}
             placeholder="Enter your Password"
             onChangeText={(Text) => {
               setPassword(Text);
