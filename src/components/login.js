@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Button, View, Text, StyleSheet, TextInput, Image} from 'react-native';
 import styles from './styles';
-import Home from '../loggedin/home';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Axios from 'axios';
