@@ -19,10 +19,14 @@ const Signup = ({navigation}) => {
     console.log(obj, '><><><><>><');
     Axios.post(BASE_URL + '/auth/sign_up', obj)
       .then((result) => {
-        alert('Registered Successfully');
+        if (result == "Exists") {
+          alert('User Exists');
+        } else {
+          alert('Registered Successfully');
+        }
       })
       .catch((result) => {
-        alert.log('Error>>>', result);
+        alert('Error>>>', result);
         console.log(BASE_URL);
       });
   };

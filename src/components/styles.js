@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
     color: 'orange',
   },
   stretch: {
-    width: 325,
-    height: 200,
+    width: 320,
+    height: 250,
     resizeMode: 'stretch',
   },
   flex: {

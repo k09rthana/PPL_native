@@ -8,6 +8,8 @@ import {
   StatusBar,
   Image,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 // import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 // import SignUpfrom "./SignUp"
 // import {NavigationContainer} from '@react-navigation/native';

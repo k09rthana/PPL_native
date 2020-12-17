@@ -107,16 +107,17 @@ import Login from './src/components/login';
 import Home from './src/loggedin/home';
 import 'react-native-gesture-handler';
 import style from './src/components/styles';
-import AsyncStorage from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
 
 function App() {
-  const [isLoggedin, setIsLoggedin] = React.useState(true);
+  const [isLoggedin, setIsLoggedin] = React.useState(false);
 
   // AsyncStorage.getItem('isLoggedin').then((data) => {
   //   if (data != null && data == true) setIsLogedin(true);
   //   else setIsLoggedin(false);
   // });
-  return isLoggedin ? <Home /> : <Login />;
+  return AsyncStorage.getItem('email') != "0" ? <Home /> : <Login />;
+  console.log('hi >>>', AsyncStorage.getItem('email'));
   // return <Home />;
 }
 

@@ -12,32 +12,43 @@ import {
 } from 'react-native';
 import Axios from 'axios';
 import {BASE_URL} from '../backendPPL/config/config';
+import AsyncStorage from '@react-native-community/async-storage';
 
 // Import Image Picker
 import ImagePicker, {launchImageLibrary} from 'react-native-image-picker';
 // import showImagePicker from 'react-native-image-picker';
 
-const App = () => {
+const UploadPost = () => {
   const handleSubmit = () => {
     let obj = {
       title: title,
       category: category,
-      image: image,
+      // email: email,
+      image: {uri: uri, name: name, type: type},
     };
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('image', obj.image);
+    // console.log("Image>>>>>>>>>",image);
+    formData.append('category', category);
+
     console.log(obj, '><><><><>><');
-    Axios.post(BASE_URL + '/post/create', obj)
+    Axios.post(BASE_URL + '/post/create', formData)
       .then((result) => {
         alert('Upload Complete');
       })
       .catch((result) => {
-        alert.log('Error>>>', result);
+        alert('Error>>>', result);
         console.log(BASE_URL);
       });
   };
 
   const [title, setTitle] = useState('');
   const [category, setcategory] = useState({});
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState({});
+  const [uri, setUri] = useState('');
+  const [name, setName] = useState('');
+  const [type, setType] = useState('');
   const [filePath, setFilePath] = useState('');
 
   const chooseFile = () => {
@@ -51,7 +62,7 @@ const App = () => {
       ],
       storageOptions: {
         skipBackup: true,
-        path: 'images',
+        path: '../images',
       },
     };
 
@@ -75,7 +86,6 @@ const App = () => {
       }
     });
   };
-
   return (
     <SafeAreaView style={{flex: 1}}>
       {/* <Text style={styles.titleText}>
@@ -129,23 +139,27 @@ const App = () => {
                 console.log('RESPONSE>>>>>', response);
                 // console.log('File Name', response.fileName);
                 // setResponse(response);
-                setImage(response.fileName);
+                setUri(response.uri);
+
+                setName(response.fileName);
+                console.log('uri>>>>>>>>>>>>>', response.name);
+
+                setType(response.type);
               },
             );
           }}
         />
-        {console.log('filename>>>>>>>>>>>>', image)}
         <Text></Text>
 
-        {image === '' ? null : (
-          // <Image
-          //   source={{uri: image}}
-          //   style={{height: 20, width: 100, backgroundColor: 'pink'}}
-          // />
-          <Text style={{margin: 20}}>File Name : {image}</Text>
+        {uri === '' ? null : (
+          <Image
+            source={{uri: uri}}
+            style={{height: 100, width: 100, backgroundColor: 'pink'}}
+          />
+          // <Text style={{margin: 20}}>File Name : {uri}</Text>
         )}
         <Text></Text>
-        <Button title="Upload"  color="orange" onPress={handleSubmit} />
+        <Button title="Upload" color="orange" onPress={handleSubmit} />
 
         {/* <TouchableOpacity
           activeOpacity={0.5}
@@ -158,7 +172,7 @@ const App = () => {
   );
 };
 
-export default App;
+export default UploadPost;
 
 const styles = StyleSheet.create({
   container: {

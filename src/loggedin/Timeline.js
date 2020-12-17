@@ -7,53 +7,35 @@ import {
   ScrollView,
   Image,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import Styles from '../components/styles';
-import UploadPost from './MyUploads';
+import UploadPost from './UploadPost';
+import Login from '../components/login';
 
 const Timeline = ({navigation}) => {
+  // const handleLogOut = () => {
+  //   AsyncStorage.setItem('email', '0');
+  // };
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView>
-      <Button
-            title="Upload Post"
-            onPress={() => navigation.navigate('UploadPost')}
-            style={{margin:10}}
-          />
-        <View>
-      
-        </View>
+        {/* <Button title="LOGOUT" onPress={handleLogOut} /> */}
+        <Button
+          title="Upload Post"
+          onPress={() => navigation.navigate('UploadPost')}
+          style={{margin: 10}}
+        />
+        <View></View>
         <View style={{flex: 1, padding: 30}}>
-          
           <Text>Image Caption</Text>
           {/* <Text>Image Category</Text> */}
+          <Image source={require('../images/pic_small.png')} />
 
           <Image />
           {/* <Text>Profile Name</Text> */}
           <Image
             style={Styles.stretch}
             source={require('../images/lft_img1.png')}
-          />
-        </View>
-        <View style={{flex: 1, padding: 30}}>
-          <Text>Image Caption</Text>
-          {/* <Text>Image Category</Text> */}
-
-          <Image />
-          {/* <Text>Profile Name</Text> */}
-          <Image
-            style={Styles.stretch}
-            source={require('../images/feat_img3.png')}
-          />
-        </View>
-        <View style={{flex: 1, padding: 30}}>
-          <Text>Image Caption</Text>
-          {/* <Text>Image Category</Text> */}
-
-          <Image />
-          {/* <Text>Profile Name</Text> */}
-          <Image
-            style={Styles.stretch}
-            source={require('../images/stay-positive.jpeg')}
           />
         </View>
       </ScrollView>

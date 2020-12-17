@@ -1,12 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import {Button, View, Text, StyleSheet, TextInput, Image} from 'react-native';
 import styles from './styles';
+import Home from '../loggedin/home';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Axios from 'axios';
-import {AsyncStorage} from 'react-native';
+// import {AsyncStorage} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+
 import {BASE_URL} from '../backendPPL/config/config';
 import Signup from './signup';
+
+
 
 const Login = ({navigation}) => {
   const handleSubmit = () => {
@@ -17,18 +22,28 @@ const Login = ({navigation}) => {
     Axios.post(BASE_URL + '/auth/login', obj)
       .then((result) => {
         if (result) {
-          AsyncStorage.setItem("email","email")
+          // AsyncStorage.setItem('email', JSON.stringify(email));
+
+          // console.log('hi >>>', JSON.stringify(email));
+          AsyncStorage.setItem('email', email);
+
+          alert('Welcome');
         } else {
           alert('Invalid Username or Password');
         }
       })
       .catch((e) => {
         console.log('error>>>>>>>>>>>>>', e);
+        AsyncStorage.setItem('email', null);
+
       });
   };
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // let e = AsyncStorage.getItem('email');
+  // console.log(e);
+
   return (
     <View style={styles.header}>
       <Image style={styles.logo} source={require('../images/logo.png')} />
@@ -83,7 +98,7 @@ function LoginNavigation() {
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Login" component={Login} />
-        {/* <Stack.Screen name="loggedinHome" component={loggedinHome} /> */}
+        <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );
