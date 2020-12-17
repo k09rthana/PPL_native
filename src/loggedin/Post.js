@@ -14,28 +14,28 @@ import Login from '../components/login';
 import Axios from 'axios';
 import {BASE_URL} from '../backendPPL/config/config';
 
-const Timeline = ({navigation}) => {
+const Post = (props) => {
   // const handleLogOut = () => {
   //   AsyncStorage.setItem('email', '0');
   // };
-  let img;
+//   let img;
   const [title, setTitle] = React.useState('');
-  const [image, setimage] = React.useState('');
-  const handleGetPost = () => {
-    Axios.get(BASE_URL + '/post/getPost')
-      .then((result) => {
-        console.log('result>>>>>>', result.data);
-        setTitle(result.data.title);
-        setimage('http://192.168.100.180:8082/post/' + result.data.image);
-        // (img = 'http://192.168.100.180:8082/post/'), result.data.image;
-        console.log('img:::::::', img);
-        console.log('Got Posts');
-      })
-      .catch(() => {
-        alert('Error>>>', result);
-        console.log(BASE_URL);
-      });
-  };
+  const [image, setimage] = React.useState('http://192.168.100.180:8082/post/' + props.image);
+  
+//   const handleGetPost = () => {
+//     Axios.get(BASE_URL + '/post/getPost')
+//       .then((result) => {
+//         console.log('result>>>>>>', result.data);
+//         setTitle(result.data.title);
+//         setimage('http://192.168.100.180:8082/post/' + result.data.image);
+//         // (img = 'http://192.168.100.180:8082/post/'), result.data.image;
+//         console.log('Got Posts');
+//       })
+//       .catch(() => {
+//         alert('Error>>>', result);
+//         console.log(BASE_URL);
+//       });
+//   };
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -48,7 +48,7 @@ const Timeline = ({navigation}) => {
         /> */}
         <View></View>
         <View style={{flex: 1, padding: 30}}>
-          <Text>{title}</Text>
+          <Text >{props.title}</Text>
           {/* <Text>Image Category</Text> */}
           <Image source={require('../images/pic_small.png')} />
 
@@ -59,11 +59,11 @@ const Timeline = ({navigation}) => {
               source={{uri: image}}
             />
           ) : null}
-          <Button title="Get Posts" onPress={handleGetPost} />
+          {/* <Button title="Get Posts" onPress={handleGetPost} /> */}
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default Timeline;
+export default Post;

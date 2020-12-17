@@ -20,17 +20,18 @@ const Timeline = ({navigation}) => {
   // };
   let img;
   const [title, setTitle] = React.useState('');
-  const [image, setimage] = React.useState('');
-  const [data, setData] = React.useState('');
+  const [imageCollection, setimageCollection] = React.useState([]);
+  // const [img, setImg] = React.useState('');
 
   const handleGetPost = () => {
     Axios.get(BASE_URL + '/post/getPost')
       .then((result) => {
         console.log('result>>>>>>', result.data);
-        // setTitle(result.data.title);
+        // setTitle(result.title);
+        // console.log('title>>>>>', title);
         // setimage('http://192.168.100.180:8082/post/' + result.data.image);
-        setData(result.data);
-        console.log('data::::..:::::', data);
+        setimageCollection(result.data);
+        console.log('data::::..:::::', imageCollection);
 
         // (img = 'http://192.168.100.180:8082/post/'), result.data.image;
         console.log('img:::::::', img);
@@ -48,18 +49,9 @@ const Timeline = ({navigation}) => {
         <Button title="POST" onPress={handleGetPost} />
         <View>
           {/* <Post/> */}
-          {/* {data.map((item) => {
-          return (
-            <>
-              <table style={{ width: "100%", textAlign: "left" }}>
-                <tr >
-                  <td style={{ width: "10%" }}> {item.title}</td>
-                  
-                </tr>
-              </table>
-            </>
-          );
-        })} */}
+          {imageCollection.map((item) => {
+            return <Post title={item.title} image={item.image} />;
+          })}
         </View>
       </ScrollView>
     </SafeAreaView>
