@@ -1,21 +1,98 @@
-import * as React from 'react';
-import {Button, View, Text, SafeAreaView, TextInput, Image} from 'react-native';
-import styles from '../components/styles';
+import React, {useState} from 'react';
+import {
+  FlatList,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Button,
+  Image,
+} from 'react-native';
+import Axios from 'axios';
+import {BASE_URL} from '../backendPPL/config/config';
 
-const MyUploads = ({props, navigation}) => {
+const Flat = () => {
+  const [selectedId, setSelectedId] = useState(null);
+  const [DATA, setDATA] = useState([]);
+  const [img, setimg] = useState('');
+
+  // const handleImage = (item) => {
+  //   setimg('http://192.168.100.180:8082/post/' + item.image);
+  // };
+
+  const Item = ({item, onPress, style}) => (
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.item, style]}
+      // onLoad={handleImage(item)}
+      >
+      <Text style={styles.title}>{item.title}</Text>
+      {img != '' ? <Image source={{uri: img}} /> : null}
+    </TouchableOpacity>
+  );
+
+  const handleSubmit = () => {
+    Axios.get(BASE_URL + '/post/getPost')
+      .then((result) => {
+        console.log('result>>>>>>', result.data);
+        // setTitle(result.title);
+        // console.log('title>>>>>', title);
+        // setimage('http://192.168.100.180:8082/post/' + result.data.image);
+        setDATA(result.data);
+        setimage('http://192.168.100.180:8082/post/' + result.data.image);
+        console.log();
+        // setimg('http://192.168.100.180:8082/post/' + result.data.image);
+        console.log('img :::...::::', result.data);
+        // (img = 'http://192.168.100.180:8082/post/'), result.data.image;
+        console.log('Got Posts');
+      })
+      .catch(() => {
+        alert('Error>>>', result);
+        console.log(BASE_URL);
+      });
+  };
+
+  const renderItem = ({item}) => {
+    const backgroundColor = item.id === selectedId ? 'yellow' : 'yellow';
+
+    return (
+      <Item
+        item={item}
+        onLoad={() => setimg('http://192.168.100.180:8082/post/' + item.image)}
+        onPress={() => setSelectedId(item.id)}
+        style={{height: 400, backgroundColor: 'lightblue'}}
+      />
+    );
+  };
+
   return (
-    <SafeAreaView style={{flex: 1}}>
-      {/* <Image style={styles.logo} source={require('../images/logo.png')} /> */}
-      <View style={{flex: 1, padding: 16}}>
-        <Text></Text>
-  {/* <Text>{title}</Text> */}
-  <Image source={require('../images/pic_small.png')}/>
-  {/* <Text>{firstName}</Text>
-  <Text>{date}</Text>
-  <Image source={uri :image.uri}/> */}
-      </View>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        extraData={selectedId}
+      />
+
+      <Button title="Press here" onPress={handleSubmit} />
     </SafeAreaView>
   );
 };
 
-export default MyUploads;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  item: {
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
+});
+
+export default Flat;
