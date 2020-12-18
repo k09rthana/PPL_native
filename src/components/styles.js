@@ -12,6 +12,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
+  caption: {
+    display: 'flex',
+    textAlign:'center',
+    color: 'blue',
+    fontSize: 20,
+    fontWeight: 'bold',
+
+  },
   input: {
     backgroundColor: 'white',
     fontSize: 12,
@@ -49,28 +57,38 @@ const styles = StyleSheet.create({
     height: 250,
     resizeMode: 'stretch',
   },
+  like: {
+    width: 15,
+    height: 15,
+    resizeMode: 'stretch',
+  },
+  numLikes: {
+    fontSize: 9,
+  },
+  buttonLike: {
+    width: 30,
+    backgroundColor: 'brown',
+  },
   flex: {
-    flex: 1
+    flex: 1,
   },
   centerContainer: {
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   title: {
-    fontSize: 22
+    fontSize: 22,
   },
   // add below
   selectButtonContainer: {
     margin: 20,
-    borderRadius: 5
+    borderRadius: 5,
   },
   selectButtonTitle: {
     padding: 10,
-    fontSize: 18
-  }
-  
+    fontSize: 18,
+  },
 });
-
 
 export const COLORS = {
   primaryDark: '#22212c',
@@ -78,7 +96,7 @@ export const COLORS = {
   primaryRed: '#ff5555',
   primaryPink: '#ff80bf',
   primaryYellow: '#ffff80',
-  primaryOrange: '#ff9580'
+  primaryOrange: '#ff9580',
 };
 
 export default styles;

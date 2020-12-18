@@ -18,24 +18,19 @@ const Post = (props) => {
   // const handleLogOut = () => {
   //   AsyncStorage.setItem('email', '0');
   // };
-//   let img;
+  //   let img;
   const [title, setTitle] = React.useState('');
-  const [image, setimage] = React.useState('http://192.168.100.180:8082/post/' + props.image);
-  
-//   const handleGetPost = () => {
-//     Axios.get(BASE_URL + '/post/getPost')
-//       .then((result) => {
-//         console.log('result>>>>>>', result.data);
-//         setTitle(result.data.title);
-//         setimage('http://192.168.100.180:8082/post/' + result.data.image);
-//         // (img = 'http://192.168.100.180:8082/post/'), result.data.image;
-//         console.log('Got Posts');
-//       })
-//       .catch(() => {
-//         alert('Error>>>', result);
-//         console.log(BASE_URL);
-//       });
-//   };
+  const [image, setimage] = React.useState(
+    'http://192.168.100.180:8082/post/' + props.image,
+  );
+  const [likes, setLike] = React.useState(0);
+  const handlelike = () => {
+    if (likes == 0) {
+      setLike(1);
+    } else {
+      setLike(0);
+    }
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -47,10 +42,13 @@ const Post = (props) => {
           style={{margin: 10}}
         /> */}
         <View></View>
-        <View style={{flex: 1, padding: 30}}>
-          <Text >{props.title}</Text>
+        <View style={{flex: 1, padding: 30, backgroundColor: '#d3d3d3',marginTop:20}}>
+          <Text style={Styles.caption}>{props.title}</Text>
           {/* <Text>Image Category</Text> */}
-          <Image source={require('../images/pic_small.png')} />
+          <Image
+            style={Styles.like}
+            source={require('../images/pic_small.png')}
+          />
 
           {image != '' ? (
             <Image
@@ -59,7 +57,24 @@ const Post = (props) => {
               source={{uri: image}}
             />
           ) : null}
-          {/* <Button title="Get Posts" onPress={handleGetPost} /> */}
+
+          {likes == 0 ? (
+            <Button
+              title="Like"
+              style={Styles.buttonLike}
+              onPress={handlelike}
+            />
+          ) : (
+            <Button
+              title="Unlike"
+              style={Styles.buttonLike}
+              onPress={handlelike}
+            />
+          )}
+          {/* <Text style={Styles.numLikes}>{likes}</Text> */}
+          {likes != 0 ? (
+            <Image style={Styles.like} source={require('../images/like.png')} />
+          ) : null}
         </View>
       </ScrollView>
     </SafeAreaView>

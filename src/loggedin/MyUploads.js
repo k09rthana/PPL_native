@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Button,
   Image,
+  View,
 } from 'react-native';
 import Axios from 'axios';
 import {BASE_URL} from '../backendPPL/config/config';
@@ -23,11 +24,12 @@ const Flat = () => {
 
   const Item = ({item, onPress, style}) => (
     <TouchableOpacity
-      onPress={onPress}
-      style={[styles.item, style]}
-      // onLoad={handleImage(item)}
-      >
+      onPress={() => setimg('http://192.168.100.180:8082/post/' + item.image)}
+      style={[styles.item, style]}>
       <Text style={styles.title}>{item.title}</Text>
+      {/* {DATA.map((item) => {
+        setimg('http://192.168.100.180:8082/post/' + item.image);
+      })} */}
       {img != '' ? <Image source={{uri: img}} /> : null}
     </TouchableOpacity>
   );
@@ -35,12 +37,13 @@ const Flat = () => {
   const handleSubmit = () => {
     Axios.get(BASE_URL + '/post/getPost')
       .then((result) => {
-        console.log('result>>>>>>', result.data);
+        // console.log('result>>>>>>', result.data);
         // setTitle(result.title);
         // console.log('title>>>>>', title);
         // setimage('http://192.168.100.180:8082/post/' + result.data.image);
         setDATA(result.data);
-        setimage('http://192.168.100.180:8082/post/' + result.data.image);
+
+        // setimage('http://192.168.100.180:8082/post/' + result.data.image);
         console.log();
         // setimg('http://192.168.100.180:8082/post/' + result.data.image);
         console.log('img :::...::::', result.data);
@@ -59,8 +62,7 @@ const Flat = () => {
     return (
       <Item
         item={item}
-        onLoad={() => setimg('http://192.168.100.180:8082/post/' + item.image)}
-        onPress={() => setSelectedId(item.id)}
+        onPress={() => setimg('http://192.168.100.180:8082/post/' + item.image)}
         style={{height: 400, backgroundColor: 'lightblue'}}
       />
     );
@@ -92,6 +94,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+    alignContent: 'center',
   },
 });
 
