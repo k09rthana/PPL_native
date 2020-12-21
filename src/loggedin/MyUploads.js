@@ -40,7 +40,8 @@ const Flat = () => {
           source={{
             uri: img,
           }}></Image>
-      </TouchableOpacity>
+      </TouchableOpacity>    // const backgroundColor = item.id === selectedId ? 'yellow' : 'yellow';
+
     );
   };
 
@@ -54,20 +55,18 @@ const Flat = () => {
         setDATA(result.data);
 
         // setimage('http://192.168.100.180:8082/post/' + result.data.image);
-        console.log();
         // setimg('http://192.168.100.180:8082/post/' + result.data.image);
-        console.log('img :::...::::', result.data);
         // (img = 'http://192.168.100.180:8082/post/'), result.data.image;
-        console.log('Got Posts');
+       
       })
       .catch(() => {
-        alert('Error>>>', result);
+        alert('Error>>>');
         console.log(BASE_URL);
       });
   };
 
   const renderItem = ({item}) => {
-    const backgroundColor = item.id === selectedId ? 'yellow' : 'yellow';
+    // const backgroundColor = item.id === selectedId ? 'yellow' : 'yellow';
 
     return (
       <Item

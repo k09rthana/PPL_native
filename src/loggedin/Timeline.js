@@ -1,4 +1,5 @@
-import * as React from 'react';
+// import * as React from 'react';
+import React, {useEffect} from 'react';
 import {
   Button,
   View,
@@ -18,15 +19,7 @@ import {apicaller} from '../utils/apicaller';
 
 // import InfiniteScroll from './infiniteScroll';
 const Timeline = ({navigation}) => {
-  // const handleLogOut = () => {
-  //   AsyncStorage.setItem('email', '0');
-  // };
-  let img;
-  const [title, setTitle] = React.useState('');
-  const [imageCollection, setimageCollection] = React.useState([]);
-  // const [img, setImg] = React.useState('');
-
-  const handleGetPost = () => {
+  useEffect(() => {
     // apicaller('get', '/post/getPost')
     //   .then((res) => {
     //     console.log(res.data);
@@ -54,12 +47,21 @@ const Timeline = ({navigation}) => {
         alert('Error>>>', result);
         console.log(BASE_URL);
       });
-  };
+  }, []);
+  // const handleLogOut = () => {
+  //   AsyncStorage.setItem('email', '0');
+  // };
+  let img;
+  const [title, setTitle] = React.useState('');
+  const [imageCollection, setimageCollection] = React.useState([]);
+  // const [img, setImg] = React.useState('');
+
+  const handleGetPost = () => {};
 
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView>
-        <Button title="POST" onPress={handleGetPost} />
+        {/* <Button title="POST" onPress={handleGetPost} /> */}
 
         <View>
           {/* <Post/> */}
