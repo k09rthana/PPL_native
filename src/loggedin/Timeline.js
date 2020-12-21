@@ -14,7 +14,7 @@ import Login from '../components/login';
 import Axios from 'axios';
 import {BASE_URL} from '../backendPPL/config/config';
 import Post from './Post';
-import DRop from './search';
+import InfiniteScroll from './infiniteScroll';
 const Timeline = ({navigation}) => {
   // const handleLogOut = () => {
   //   AsyncStorage.setItem('email', '0');
@@ -47,13 +47,12 @@ const Timeline = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView>
-        
         <Button title="POST" onPress={handleGetPost} />
 
         <View>
           {/* <Post/> */}
           {imageCollection.map((item) => {
-            return <Post title={item.title} image={item.image} />;
+            return <InfiniteScroll title={item.title} image={item.image} />;
           })}
         </View>
       </ScrollView>

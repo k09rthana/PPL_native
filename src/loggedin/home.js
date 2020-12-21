@@ -1,40 +1,3 @@
-// import * as React from 'react';
-// import {Button, View} from 'react-native';
-// import {createDrawerNavigator} from '@react-navigation/drawer';
-// import {NavigationContainer} from '@react-navigation/native';
-
-// function HomeScreen({navigation}) {
-//   return (
-//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-//       <Button
-//         onPress={() => navigation.navigate('Notifications')}
-//         title="Go to notifications"
-//       />
-//     </View>
-//   );
-// }
-
-// function NotificationsScreen({navigation}) {
-//   return (
-//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-//       <Button onPress={() => navigation.goBack()} title="Go back home" />
-//     </View>
-//   );
-// }
-
-// const Drawer = createDrawerNavigator();
-
-// export default function App() {
-//   return (
-//     <NavigationContainer>
-//       <Drawer.Navigator initialRouteName="Home">
-//         <Drawer.Screen name="Home" component={HomeScreen} />
-//         <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-//       </Drawer.Navigator>
-//     </NavigationContainer>
-//   );
-// }
-
 import 'react-native-gesture-handler';
 
 import * as React from 'react';
@@ -47,6 +10,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import Timeline from './Timeline';
 import MyUploads from './MyUploads';
 import UploadPost from './UploadPost';
+import InfiniteScroll from './infiniteScroll';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -154,6 +118,30 @@ function thirdScreenStack({navigation}) {
   );
 }
 
+function InfiniteScrollScreenStack({navigation}) {
+  return (
+    <Stack.Navigator initialRouteName="InfiniteScroll">
+      <Stack.Screen
+        name="InfiniteScroll"
+        component={InfiniteScroll}
+        options={{
+          title: 'InfiniteScroll', //Set Header Title
+          headerLeft: () => (
+            <NavigationDrawerStructure navigationProps={navigation} />
+          ),
+          headerStyle: {
+            backgroundColor: 'blue', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold', //Set Header text style
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function App() {
   return (
     <NavigationContainer>
@@ -176,6 +164,12 @@ function App() {
           name="UploadPost"
           options={{drawerLabel: 'UploadPost'}}
           component={thirdScreenStack}
+          style={{visible: 'false'}}
+        />
+          <Drawer.Screen
+          name="InfiniteScroll"
+          options={{drawerLabel: 'InfiniteScroll'}}
+          component={InfiniteScrollScreenStack}
           style={{visible: 'false'}}
         />
       </Drawer.Navigator>

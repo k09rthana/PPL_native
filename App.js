@@ -111,6 +111,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 function App() {
   const [isLoggedin, setIsLoggedin] = React.useState(false);
+  
 
   // AsyncStorage.getItem('isLoggedin').then((data) => {
   //   if (data != null && data == true) setIsLogedin(true);
