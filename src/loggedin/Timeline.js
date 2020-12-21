@@ -8,13 +8,15 @@ import {
   Image,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import Styles from '../components/styles';
+import Styles from '../loggedOut/styles';
 import UploadPost from './UploadPost';
-import Login from '../components/login';
+
 import Axios from 'axios';
 import {BASE_URL} from '../backendPPL/config/config';
 import Post from './Post';
-import InfiniteScroll from './infiniteScroll';
+import {apicaller} from '../utils/apicaller';
+
+// import InfiniteScroll from './infiniteScroll';
 const Timeline = ({navigation}) => {
   // const handleLogOut = () => {
   //   AsyncStorage.setItem('email', '0');
@@ -25,6 +27,16 @@ const Timeline = ({navigation}) => {
   // const [img, setImg] = React.useState('');
 
   const handleGetPost = () => {
+    // apicaller('get', '/post/getPost')
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     setimageCollection(result.data);
+    //   })
+    //   .catch(() => {
+    //     alert('Error>>>');
+    //     console.log(BASE_URL);
+    //   });
+
     Axios.get(BASE_URL + '/post/getPost')
       .then((result) => {
         console.log('result>>>>>>', result.data);
@@ -35,8 +47,8 @@ const Timeline = ({navigation}) => {
         console.log('data::::..:::::', imageCollection);
 
         // (img = 'http://192.168.100.180:8082/post/'), result.data.image;
-        console.log('img:::::::', img);
-        console.log('Got Posts');
+        // console.log('img:::::::', img);
+        // console.log('Got Posts');
       })
       .catch(() => {
         alert('Error>>>', result);
@@ -52,7 +64,7 @@ const Timeline = ({navigation}) => {
         <View>
           {/* <Post/> */}
           {imageCollection.map((item) => {
-            return <InfiniteScroll title={item.title} image={item.image} />;
+            return <Post title={item.title} image={item.image} />;
           })}
         </View>
       </ScrollView>

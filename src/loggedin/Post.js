@@ -8,9 +8,9 @@ import {
   Image,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import Styles from '../components/styles';
+import Styles from '../loggedOut/styles';
 import UploadPost from './UploadPost';
-import Login from '../components/login';
+// import Login from '../components/login';
 import Axios from 'axios';
 import {BASE_URL} from '../backendPPL/config/config';
 

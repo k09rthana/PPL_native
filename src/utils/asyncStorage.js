@@ -23,16 +23,7 @@ export let get = key => {
       .catch(reject);
   });
 };
-export let multiGet = key => {
-  return new Promise((resolve, reject) => {
-    AsyncStorage.multiGet(key)
-      .then(value => {
-        // console.log("Value", value);
-        resolve(value);
-      })
-      .catch(reject);
-  });
-};
+
 export let remove = key => {
   return new Promise((resolve, reject) => {
     AsyncStorage.removeItem(key)
@@ -45,15 +36,5 @@ export let getJSONObject = str => {
     return JSON.parse(str);
   } catch (e) {
     return str;
-  }
-};
-export let getString = data => {
-  try {
-    if (typeof data === "string") {
-      return data;
-    }
-    return JSON.stringify(data);
-  } catch (e) {
-    return data;
   }
 };
