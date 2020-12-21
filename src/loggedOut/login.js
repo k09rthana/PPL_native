@@ -5,7 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Axios from 'axios';
 // import {AsyncStorage} from 'react-native';
-import {apicaller} from '../utils/apicaller';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {BASE_URL} from '../backendPPL/config/config';
 import Signup from './signup';
@@ -18,31 +18,24 @@ const Login = ({navigation}) => {
       email: email,
       password: password,
     };
-    apicaller("post", "/auth/login", obj).then((res) => {
-      console.log(res.data);
-      alert('Login Successful!');
+    Axios.post(BASE_URL + '/auth/login', obj)
+      .then((result) => {
+        if (result) {
+          // AsyncStorage.setItem('email', JSON.stringify(email));
 
-    });
+          // console.log('hi >>>', JSON.stringify(email));
+          AsyncStorage.setItem('email', email);
 
-    
-    // Axios.post(BASE_URL + '/auth/login', obj)
-      // .then((result) => {
-      //   if (result) {
-      //     // AsyncStorage.setItem('email', JSON.stringify(email));
+          alert('Welcome');
+        } else {
+          alert('Invalid Username or Password');
+        }
+      })
+      .catch((e) => {
+        console.log('error>>>>>>>>>>>>>', e);
+        AsyncStorage.setItem('email', null);
 
-      //     // console.log('hi >>>', JSON.stringify(email));
-      //     AsyncStorage.setItem('email', email);
-
-      //     alert('Welcome');
-      //   } else {
-      //     alert('Invalid Username or Password');
-      //   }
-      // })
-      // .catch((e) => {
-      //   console.log('error>>>>>>>>>>>>>', e);
-      //   AsyncStorage.setItem('email', null);
-
-      // });
+      });
   };
 
   const [email, setEmail] = useState('');
@@ -104,7 +97,7 @@ function LoginNavigation() {
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Login" component={Login} />
-        {/* <Stack.Screen name="Home" component={Home} /> */}
+        <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );

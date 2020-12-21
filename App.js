@@ -102,6 +102,8 @@ import React, {useState, useEffect} from 'react';
 import {Button, View, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import SplashScreen from 'react-native-splash-screen'
+
 
 import Login from './src/components/login';
 import Home from './src/loggedin/home';
@@ -111,7 +113,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 function App() {
   const [isLoggedin, setIsLoggedin] = React.useState(false);
-  
+  useEffect(() => {
+    SplashScreen.hide();
+}, []);
 
   // AsyncStorage.getItem('isLoggedin').then((data) => {
   //   if (data != null && data == true) setIsLogedin(true);
@@ -119,7 +123,7 @@ function App() {
   // });
   // return AsyncStorage.getItem('email') != "0" ? <Home /> : <Login />;
   // console.log('hi >>>', AsyncStorage.getItem('email'));
-  return <Home />;
+  return <Login />;
 }
 
 export default App;

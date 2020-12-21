@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Axios from 'axios';
 import {AsyncStorage} from 'react-native';
 import {BASE_URL} from '../backendPPL/config/config';
+import {apicaller} from '../utils/apicaller';
 
 const Signup = ({navigation}) => {
   const handleSubmit = () => {
@@ -17,18 +18,23 @@ const Signup = ({navigation}) => {
       lastName: lastName,
     };
     console.log(obj, '><><><><>><');
-    Axios.post(BASE_URL + '/auth/sign_up', obj)
-      .then((result) => {
-        if (result == "Exists") {
-          alert('User Exists');
-        } else {
-          alert('Registered Successfully');
-        }
-      })
-      .catch((result) => {
-        alert('Error>>>', result);
-        console.log(BASE_URL);
-      });
+    // Axios.post(BASE_URL + '/auth/sign_up', obj)
+    //   .then((result) => {
+    //     if (result == "Exists") {
+    //       alert('User Exists');
+    //     } else {
+    //       alert('Registered Successfully');
+    //     }
+    //   })
+    //   .catch((result) => {
+    //     alert('Error>>>', result);
+    //     console.log(BASE_URL);
+    //   });
+    apicaller("post", "/auth/sign_up", obj).then((res) => {
+      console.log(res.data);
+      alert('Registered Successfully');
+
+    });
   };
 
   const [username, setUsername] = useState('');
