@@ -22,17 +22,27 @@ const Flat = () => {
   //   setimg('http://192.168.100.180:8082/post/' + item.image);
   // };
 
-  const Item = ({item, onPress, style}) => (
-    <TouchableOpacity
-      onPress={() => setimg('http://192.168.100.180:8082/post/' + item.image)}
-      style={[styles.item, style]}>
-      <Text style={styles.title}>{item.title}</Text>
-      {/* {DATA.map((item) => {
+  const handleImg = (i) => {
+    setimg('http://192.168.100.180:8082/post/' + i);
+  };
+  const Item = ({item, onPress, style}) => {
+    handleImg(item.image);
+
+    console.log(item.image, 'IMage item');
+    return (
+      <TouchableOpacity style={[styles.item, style]}>
+        <Text style={styles.title}>{item.title}</Text>
+        {/* {DATA.map((item) => {
         setimg('http://192.168.100.180:8082/post/' + item.image);
       })} */}
-      {img != '' ? <Image source={{uri: img}} /> : null}
-    </TouchableOpacity>
-  );
+        {/* {img != '' ? <Image source={{uri: img}} /> : null} */}
+        <Image
+          source={{
+            uri: img,
+          }}></Image>
+      </TouchableOpacity>
+    );
+  };
 
   const handleSubmit = () => {
     Axios.get(BASE_URL + '/post/getPost')

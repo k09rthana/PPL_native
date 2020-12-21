@@ -116,9 +116,9 @@ function App() {
   //   if (data != null && data == true) setIsLogedin(true);
   //   else setIsLoggedin(false);
   // });
-  return AsyncStorage.getItem('email') != "0" ? <Home /> : <Login />;
-  console.log('hi >>>', AsyncStorage.getItem('email'));
-  // return <Home />;
+  // return AsyncStorage.getItem('email') != "0" ? <Home /> : <Login />;
+  // console.log('hi >>>', AsyncStorage.getItem('email'));
+  return <Home />;
 }
 
 export default App;

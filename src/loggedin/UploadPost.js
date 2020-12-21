@@ -17,6 +17,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 // Import Image Picker
 import ImagePicker, {launchImageLibrary} from 'react-native-image-picker';
 // import showImagePicker from 'react-native-image-picker';
+import Drop from './search';
 
 const UploadPost = () => {
   const handleSubmit = () => {
@@ -92,34 +93,9 @@ const UploadPost = () => {
         Example of Image Picker in React Native
       </Text> */}
       <View style={styles.container}>
-        <Text style={styles.label}>Caption</Text>
-        <View style={styles.rowContainer}>
-          <TextInput
-            style={styles.input}
-            name="title"
-            color="black"
-            placeholder="Enter Caption"
-            onChangeText={(Text) => {
-              setTitle(Text);
-            }}
-          />
-        </View>
-        <Text style={styles.label}>Category</Text>
+       
 
-        <View style={styles.rowContainer}>
-          <TextInput
-            style={styles.input}
-            name="category"
-            color="black"
-            placeholder="Enter Category"
-            onChangeText={(Text) => {
-              setcategory(Text);
-            }}
-          />
-        </View>
-        <Text>Upload Image</Text>
-
-        <Text style={styles.textStyle}>{filePath.uri}</Text>
+        {/* <Text style={styles.textStyle}>{filePath.uri}</Text> */}
 
         {/*         
           <Button
@@ -159,7 +135,32 @@ const UploadPost = () => {
           // <Text style={{margin: 20}}>File Name : {uri}</Text>
         )}
         <Text></Text>
-        <Button title="Upload" color="orange" onPress={handleSubmit} />
+        <Text style={styles.label}>Caption</Text>
+        <View style={styles.rowContainer}>
+          <TextInput
+            style={styles.input}
+            name="title"
+            color="black"
+            placeholder="Enter Caption"
+            onChangeText={(Text) => {
+              setTitle(Text);
+            }}
+          />
+        </View>
+        <Text style={styles.label}>Category</Text>
+
+        <View style={styles.rowContainer}>
+          <Drop />
+          {/* <TextInput
+            style={styles.input}
+            name="category"
+            color="black"
+            placeholder="Enter Category"
+            onChangeText={(Text) => {
+              setcategory(Text);
+            }}
+          /> */}
+        </View>
 
         {/* <TouchableOpacity
           activeOpacity={0.5}
@@ -168,6 +169,7 @@ const UploadPost = () => {
           <Text style={styles.textStyle}>Choose Image</Text>
         </TouchableOpacity> */}
       </View>
+      <Button title="Upload" color="orange" onPress={handleSubmit} />
     </SafeAreaView>
   );
 };
